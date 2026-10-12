@@ -1,3 +1,4 @@
+import { IfStmt } from '@angular/compiler';
 import { Component, signal } from '@angular/core';
 
 @Component({
@@ -37,9 +38,21 @@ export class Quizz {
   answer(option:string){
     if(option === this.currentQuestion().answer)
     {
+      this.score.update(v => v+1);
       console.log('true');
-    }else{
-      console.log('false');
     }
+
+    if(this.currentIndex() < this.questions.length - 1){
+      this.currentIndex.update(i => i + 1) ;
+    }else{
+      this.finished.set(true);
+      console.log('compeleted');
+    }
+  }
+
+  Restart(){
+    this.currentIndex.set(0);
+    this.score.set(0);
+    this.finished.set(false);
   }
 }
