@@ -39,14 +39,13 @@ export class Quizz {
     if(option === this.currentQuestion().answer)
     {
       this.score.update(v => v+1);
-      console.log('true');
+      
     }
 
     if(this.currentIndex() < this.questions.length - 1){
       this.currentIndex.update(i => i + 1) ;
     }else{
       this.finished.set(true);
-      console.log('compeleted');
     }
   }
 
